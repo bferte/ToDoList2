@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma ToDoList{% endblock %}
+
+{% block monTitre %}Ma ToDoList{% endblock %}
+{% block body %}
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    {% for note in notes %}
+        <div class="col">
+            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{note.title}}</div>
+                <div class="card-body">
+                    <p class="card-text">{{note.description}}</p>
+                </div>
+            </div>
+        </div>    
+        
+    {% endfor %}
+
+    </div>
+
+    {% endblock %}

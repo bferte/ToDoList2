@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ * fields = {"email"},
+ * message="l'email utilisé existe déjà")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -29,7 +35,10 @@ class User
      */
     private $password;
 
-    private $verifPassword
+    /**
+     * @Assert\EqualTo(propertyPath="password",message="Les mdp ne correspondent pas")
+     */
+    private $verifPassword;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,6 +72,16 @@ class User
         return $this;
     }
 
+    public function getUsername()
+    {
+        
+    }
+
+    public function setUsername()
+    {
+        
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -75,9 +94,22 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getVerifPassword(): ?string
     {
-        return $this->roles;
+        return $this->verifPassword;
+    }
+
+    public function setVerifPassword(string $verifPassword): self
+    {
+        $this->verifPassword = $verifPassword;
+
+        return $this;
+    }
+
+
+    public function getRoles() 
+    {
+        return [$this->roles];
     }
 
     public function setRoles(string $roles): self
@@ -85,6 +117,16 @@ class User
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function getSalt()
+    {
+        
     }
 
     /**

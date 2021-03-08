@@ -2,6 +2,13 @@
 
 {% block title %}Ma ToDoList{% endblock %}
 
+{% block addNote %}
+    <div class="bg-light border border-primary rounded row m-2 p-2">
+        <button type="button" class="btn btn-info font-weight-bold ">+</button>
+        <input type="text" class="col border border-primary rounded w-25 ">
+    </div>
+{% endblock %}
+
 {% block monTitre %}Ma ToDoList{% endblock %}
 {% block body %}
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">

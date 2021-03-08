@@ -22,6 +22,7 @@ security:
                 username_parameter: _email
                 login_path: login
                 check_path: login
+                default_target_path: notes
             logout:
                 path: logout
                 target: accueil

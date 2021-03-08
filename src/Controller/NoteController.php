@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoteController extends AbstractController
 {
     /**
-     * @Route("/user/notes", name="notes")
+     * @Route("/user/notes/", name="notes")
      */
     public function index(NoteRepository $repo): Response
     {
@@ -18,5 +18,14 @@ class NoteController extends AbstractController
         return $this->render('note/notes.html.twig', [
             'notes' => $notes
         ]);
+    }
+
+
+    /**
+     * @Route("/user/notes", name="addNote")
+     */
+    public function addNote()
+    {
+
     }
 }

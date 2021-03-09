@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Note;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NoteType extends AbstractType
@@ -18,7 +19,7 @@ class NoteType extends AbstractType
             ->add('created_at')
             ->add('user',EntityType::class,[
                 'class' => User::class,
-                'choice_label' => 'email'
+                'choice_label' => 'user'
             ])
         ;
     }

@@ -19,7 +19,18 @@ class GlobalController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('global/accueil.html.twig');
+
+        if($this->isGranted('IS_AUTHENTICATED_ANONYMOUSLY'))
+        {
+            return $this->redirectToRoute('login');
+        }
+        else if($this->isGranted('ROLE_USER'))
+        {
+            return $this->redirectToRoute('notes');
+        }
+        
+
+        //return $this->render('global/accueil.html.twig');
     }
 
     /**

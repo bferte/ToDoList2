@@ -3,28 +3,33 @@
 {% block title %}Ma ToDoList{% endblock %}
 
 {% block addNote %}
+    {{ form_start(form) }}
     <div class="bg-light border border-primary rounded row m-2 p-2">
-        <a href="{{path('addNote')}}" class="btn btn-info font-weight-bold mr-1 ">+</a>
-        <input type="text" class="col-2 border border-primary rounded w-25" placeholder="Titre">
-        <input type="text" class="col border border-primary rounded w-50" placeholder="Description">
+        <button type="submit" class="btn btn-info font-weight-bold mr-1 ">+</button>
+        {{ form_widget(form.title,{ 'attr': { 'maxlength' : 100 } }) }}
+        {{ form_widget(form.description,{ 'attr': { 'maxlength' : 255 } }) }}
     </div>
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block monTitre %}Ma ToDoList{% endblock %}
 {% block body %}
-<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    {% for note in notes %}
-        <div class="col">
-            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
-                <div class="card-header">{{note.title}}</div>
-                <div class="card-body">
-                    <p class="card-text">{{note.description}}</p>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {% for note in notes %}
+            <div class="col">
+                <div class="card text-white bg-warning mb-3 " style="max-width: 20rem;">
+                    <div class="card-header d-flex justify-content-between p-1"><span >{{ note.title }}</span>
+                        <a href="{{ path('deleteNote', {'id': note.id}) }}" class="btn btn-danger ">X</a>
+                    </div>
+
+                    <div class="card-body ">
+                        <p class="card-text">{{ note.description }}</p>
+                    </div>
                 </div>
             </div>
-        </div>    
-        
-    {% endfor %}
+
+        {% endfor %}
 
     </div>
 
-    {% endblock %}
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Note;
+
+use App\Form\NoteType;
 use App\Repository\NoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,40 +17,55 @@ class NoteController extends AbstractController
     /**
      * @Route("/user/notes", name="notes")
      */
-    public function index(NoteRepository $repo): Response
+    public function index(NoteRepository $repo, Request $request, EntityManagerInterface $em): Response
     {
-        if($this->isGranted('ROLE_USER'))
-        {
 
-            $idUser = $this->getUser()->getId();
+        $note = new Note();
+        $form = $this->createForm(NoteType::class, $note);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note->setCreatedAt(new \DateTime());
+            $note->setUser($this->getUser());
+            $em->persist($note);
+            $em->flush();
 
-            $notes = $repo->findByUser($idUser);
-            return $this->render('note/notes.html.twig', [
-                'notes' => $notes
-            ]);
-            
-        } else
-        {
-            return $this->redirectToRoute('login');
+            $note = new Note();
+            $form = $this->createForm(NoteType::class, $note);
         }
 
-        
-    }
+        $idUser = $this->getUser()->getId();
 
+        $notes = $repo->findByUser($idUser);
+        return $this->render('note/notes.html.twig', [
+            'notes' => $notes,
+            "form" => $form->createView(),
+        ]);
+
+    }
 
     /**
-     * @Route("/user/notes/add", name="addNote")
+     * @Route ("/user/notes/sup/{id}", name="deleteNote")
      */
-    public function addNote(Note $note,EntityManagerInterface $em)
-    {
-        $note = new Note();
-        $note->setTitle('Keyboard');
-        $note->setDescription(1999);
-        $note->setDescription('Ergonomic and stylish!');
+    public function deleteNote($id, EntityManagerInterface $em,NoteRepository $repo){
 
-        $em->persist($note);
+            $note = $repo->find($id);
 
-        $em->flush();
-        
+            if(!$note) {
+                throw new \Exception("id ne correspond a aucune note");
+            }
+
+            $em->remove($note);
+            $em->flush();
+            $this->addFlash('success', "L'action à été effectué");
+
+
+            return $this->redirectToRoute("notes");
+
+
+
+
     }
+
+
+
 }

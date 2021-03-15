@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4041d14c-2cdb-4e7f-927e-b5cdcba2b5c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/note/noteUpgrade.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/NoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/NoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/note/notes.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/note/notes.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +122,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615793900825</updated>
-      <workItem from="1615793901934" duration="15233000" />
+      <workItem from="1615793901934" duration="19140000" />
     </task>
     <servers />
   </component>

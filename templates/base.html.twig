@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
     {% block stylesheets %}
 
@@ -33,6 +34,12 @@
                     <a class="nav-link" href="{{path('inscription')}}">Inscription</a>
                 </li>
                 {% endif %}
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="nav-link">Profile<i class="fas fa-user ml-1"></i></a>
+                </li>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('logout')}}">Deconnexion</a>

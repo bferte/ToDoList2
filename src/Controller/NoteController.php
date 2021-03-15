@@ -56,7 +56,7 @@ class NoteController extends AbstractController
 
             $em->remove($note);
             $em->flush();
-            $this->addFlash('success', "L'action à été effectué");
+            $this->addFlash('success', "La note à été supprimé !");
 
 
             return $this->redirectToRoute("notes");
@@ -64,6 +64,30 @@ class NoteController extends AbstractController
 
 
 
+    }
+
+    /**
+     * @Route("/user/notes/modif/{id}", name="modifNote")
+     */
+    public function upgradeNote( $id, Request $request, EntityManagerInterface $om,NoteRepository $repo){
+
+        $note = $repo->find($id);
+
+        $form = $this->createForm(NoteType::class,$note);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $om->persist($note);
+            $om->flush();
+            $this->addFlash('success', "La note à été modifié");
+            return $this->redirectToRoute("notes");
+
+        }
+
+        return $this->render('note/noteUpgrade.html.twig',[
+            "note" => $note,
+            "form" => $form->createView()
+        ]);
     }
 
 

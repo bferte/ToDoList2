@@ -3,6 +3,13 @@
 {% block title %}Ma ToDoList{% endblock %}
 
 {% block addNote %}
+
+    {% for message in app.flashes('success') %}
+        <div class ="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     {{ form_start(form) }}
     <div class="bg-light border border-primary rounded row m-2 p-2">
         <button type="submit" class="btn btn-info font-weight-bold mr-1 ">+</button>
@@ -19,7 +26,11 @@
             <div class="col">
                 <div class="card text-white bg-warning mb-3 " style="max-width: 20rem;">
                     <div class="card-header d-flex justify-content-between p-1"><span >{{ note.title }}</span>
-                        <a href="{{ path('deleteNote', {'id': note.id}) }}" class="btn btn-danger ">X</a>
+                        <div>
+                            <a href="{{ path('modifNote', {'id': note.id}) }}" class="btn btn-success ">+</a>
+                            <a href="{{ path('deleteNote', {'id': note.id}) }}" class="btn btn-danger ">X</a>
+                        </div>
+
                     </div>
 
                     <div class="card-body ">

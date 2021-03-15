@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block monTitre %}Modifier la note{% endblock %}
+{% block body %}
+
+ {{ form_start(form) }}
+    <div class="bg-light border border-primary rounded row m-2 p-2">
+        <button type="submit" class="btn btn-info font-weight-bold mr-1 ">+</button>
+        {{ form_widget(form.title,{ 'attr': { 'maxlength' : 100 } }) }}
+        {{ form_widget(form.description,{ 'attr': { 'maxlength' : 255 } }) }}
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
